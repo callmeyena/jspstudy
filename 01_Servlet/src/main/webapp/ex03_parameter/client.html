@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../resources/js/lib/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+
+
+	<!--  GET 방식 요청
+		  1. <a> 태그를 이용한 이동
+		  2. <form> 태그를 이용한 submit
+		  3. location.href를 이용한 이동
+		  4. open을 이용한 새 창 열기
+		  5. $.ajax({})을 이용한 비동기 처리 요청
+	 -->
+	 
+	 <!--  서버 경로 작성하는 방법 -->
+	 <ul>
+	 	<li><a href="http://localhost:9090/01_Servlet/GetServlet">정상이동</a></li>
+	 	<li><a href="/01_Servlet/GetServlet">정상이동</a></li>		<!--  가장 추천하는 방법 -->
+	 	<li><a href="01_Servlet/GetServlet">불량링크(ContextPath는 슬래시로 시작해야 한다.)</a></li>
+	 	<li><a href="/GetServlet">불량링크(슬래시로 시작하면 ContextPath인 줄 안다.)</a></li>
+	 	<li><a href="GetServlet">불량링크(URLMapping으로 인식하지만 HTML 파일의 경로에 따라 실행 여부가 달라진다.)</a></li>
+	 </ul>
+	 
+	 <!--  <a> 태그로 파라미터 보내기 -->
+	 <div>
+	 	<a href="/01_Servlet/GetServlet?model=냉장고&price=200">파라미터 전송</a>
+	 </div>
+	 
+	 <!-- <form> 태그로 submit 하기(파라미터 보내기) -->
+	 <div>
+	 	<form action="/01_Servlet/GetServlet">
+	 		<label for="model">모델명</label>
+	 		<input type="text" id="model" name="model" placeholder="모델명">			<!-- name이 파라미터 값을 받는다. 즉 name속성이 파라미터를 전달받아서 submit해주는 속성이다. -->
+	 		<label for="price">가격</label>
+	 		<input type="text" id="price" name="price" placeholder="가격(원)">
+	 		<button type="submit">파라미터 전송</button>			
+	 	</form>				<!--  <form> 태그 안에 <input> 태그가 있어야 한다 -->
+	 </div>
+	 
+	 <!-- location.href를 이용해서 파라미터 보내기 -->
+	 <div>
+	 	<button id="btn">파라미터 전송</button>
+	 </div>
+	 <script>
+	 	$('#btn').on('click', function(event) {
+	 		// location.href = '/01_Servlet/GetServlet?model=tv&price=100';	
+	 		open('/01_Servlet/GetServlet?model=tv&price=100', '', '');	// open을 이용해서 파라미터 보내기
+	 	})
+	 
+	 </script>
+	 
+	 <!-- 
+	 	 POST 방식으로 요청
+	 	 1. <form> 태그를 이용한 submit
+		 2. $.ajax({})을 이용한 비동기 처리 요청
+	  -->
+	  <div>
+	  	<form method="post" action="/01_Servlet/PostServlet">
+	  		<label for="model">모델명</label>
+	  		<input type="text" id="model" name="model">
+	  		<label for="price">가격</label>
+	  		<input type="text" id="price" name="price">			<!-- form 태그에 name 태그가 있으면 도착값에서 절대 null 값으로 인식하지 않음 - > '' 빈문자열로 인식함 -->
+	  		<input type="submit" value="파라미터 전송">
+	  	</form>
+	  </div>
+	 
+
+</body>
+</html>
