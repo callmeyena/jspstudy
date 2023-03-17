@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>진짜 세상에서 제일 모르겠는 구구단 만들기 코딩 싫어 우웩</title>
+<script src="../resources/js/lib/jquery-3.6.4.min.js"></script>
+<script>
+
+	function fnGugudan() {
+		var danValue = parseInt(Math.random() * 8) + 2;
+		var numValue = parseInt(Math.random() * 9) + 1;
+		$('#dan').text(danValue);
+		$('#num').text(numValue);
+		$('#result').val('');  // .val('') 빈 문자열을 줌으로써 result 입력창을 빈칸으로 만들어준다......
+	};
+	
+	$(function(){
+		fnGugudan();
+		$('#btn_refresh').on('click', fnGugudan);  // 선언 함수를 이벤트 리스너로 사용하는 경우에는 함수 이름만 작성한다.
+		$('#btn').on('click', function() {
+			location.href = '/01_Servlet/GugudanServlet?dan=' + $('#dan').text() + '&num=' + $('#num').text() + '&result=' + $('#result').val();
+		})
+	})
+
+</script>
+</head>
+<body>
+
+	<div>
+		<div><input type="button" value="새로고침" id="btn_refresh"></div>
+		<span id="dan"></span>
+		<span>X</span>
+		<span id="num"></span>
+		<span>=</span>
+		<input type="text" id="result" size="4">
+		<input type="button" id="btn" value="계산">
+	</div>
+	
+
+</body>
+</html>

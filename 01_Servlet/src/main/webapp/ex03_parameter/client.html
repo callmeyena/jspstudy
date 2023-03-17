@@ -49,9 +49,32 @@
 	 	$('#btn').on('click', function(event) {
 	 		// location.href = '/01_Servlet/GetServlet?model=tv&price=100';	
 	 		open('/01_Servlet/GetServlet?model=tv&price=100', '', '');	// open을 이용해서 파라미터 보내기
-	 	})
-	 
+	 	})	 
 	 </script>
+	 
+	 <!-- 배열을 파라미터로 보내기 -->
+	 <div>
+	 	<form action="/01_Servlet/ArrayServlet">
+	 	<div>
+	 		<input type="text" name="tel" size="4" maxlength="3">
+	 		-
+	 		<input type="text" name="tel" size="4" maxlength="4">
+	 		-
+	 		<input type="text" name="tel" size="4" maxlength="4">
+	 		</div>
+	 		<div>
+	 			<input type="checkbox" name="hobbies" value="travel" id="travel">
+	 			<label for="travel">여행</label>
+	 			<input type="checkbox" name="hobbies" value="swim" id="swim">
+	 			<label for="swim">수영</label>
+	 			<input type="checkbox" name="hobbies" value="golf" id="golf">
+	 			<label for="golf">골프</label>
+	 		</div>
+	 		<button>배열전송</button>
+	 	</form>
+	 </div>
+	 
+	 
 	 
 	 <!-- 
 	 	 POST 방식으로 요청
