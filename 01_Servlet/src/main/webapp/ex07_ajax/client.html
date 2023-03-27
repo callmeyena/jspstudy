@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../resources/js/lib/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+
+<div>
+	<div>
+		<input type="text" id="model" placeholder="모델">
+		<input type="text" id="price" placeholder="가격">
+		<button id="btn1">텍스트요청</button>
+	</div>
+		<div id="content1"></div>
+</div>
+<script>
+	$('#btn1').on('click', function(){
+		$('#content1').empty();
+		$.ajax({	// ajax: 가상의 자바스크립트 객체 생성 like 통신사,,,,,,,,
+				/* 요청 */
+				type: 'get',						// 요청 메소드
+				url: '/01_Servlet/TextServlet',		// 요청 URL
+				data: 'model=' + $('#model').val() +'&price=' + $('#price').val(),		// 요청 파라미터 (? 작성할 필요 x)
+				
+				/* 응답 */
+				dataType: 'text',
+				success: (resData)=> {
+						$('#content1').append(resData);
+				},
+				error: (jqXHR)=>{
+					$('#content1').append($('<div>').text('status: ' + jqXHR.status));
+					$('#content1').append($('<div>').text('responseText: ' + jqXHR.responseText));
+				}
+		})
+	})
+</script>
+
+<div>
+	<form id="frm_person"> <!-- 전달할 파라미터값이 여러개라면 form태그로 묶어서 전달하는 게 좋다! -->
+		<input type="text" name="name" placeholder="이름">
+		<input type="text" name="age" placeholder="나이">
+		<input type="button" id="btn2" value="JSON요청">
+	</form>
+	<div id="content2"></div>
+</div>
+<script>
+	$('#btn2').on('click', function() {
+		$('#content2').empty();
+		$.ajax({
+			/* 요청 */
+			type: 'get',
+			url: '/01_Servlet/JSONServlet',
+			data: $('#frm_person').serialize(), 	// serialiaze*(): form 내부에 있는 모든 입력 요소(name 속성이 파라미터로 인식 된다)를 보낸다. 
+			/* 응답 */
+			dataType: 'json',
+			success: (resData)=> { 					// resData == '{"name":"코딩노예", "age":28}'
+				$('#content2').append($('<div>').text(resData.name));
+				$('#content2').append($('<div>').text(resData.age));
+				
+			},
+			error: (jqXHR)=> { // jqXHR : 가상의 자바스크립트 객체
+				$('#content2').append($('<div>').text(jqXHR.status));			// error가 났을 때, content2의 <div>태그 안에 text형식으로 오류코드를 jqXHR.status에 넣겠다
+				$('#content2').append($('<div>').text(jqXHR.responseText));		// error가 났을 때, content2의 <div>태그 안에 text형식으로 오류메시지를 jqXHR.responseText에 넣겠다
+			}
+		})
+		
+	})
+</script>
+
+
+<div>
+	<form id="frm_book">
+		<input type="text" name="title" placeholder="제목">
+		<input type="text" name="author" placeholder="저자">
+		<input type="text" name="price" placeholder="가격">
+		<input type="button" id="btn3" value="XML요청">
+	</form>
+	<div id="content3" ></div>
+</div>
+<script>
+	$('#btn3').on('click', function() {
+		$('#content3').empty();
+		$.ajax({
+			/* 요청 */
+			type: 'get',
+			url: '/01_Servlet/XMLServlet',
+			data: $('#frm_book').serialize(),
+			/* 응답 */
+			dataType: 'xml',
+			success: (resData)=> {
+				var ul = $('<ul>');
+				ul.append($('<li>').text('제목: ' + $(resData).find('title').text()));
+				ul.append($('<li>').text('저자: ' + $(resData).find('author').text()));
+				ul.append($('<li>').text('가격: ' + $(resData).find('price').
+						text() + '원'));
+				$('#content3').append(ul);
+				
+			}
+			
+		})
+		
+		
+	})
+
+
+</script>
+
+</body>
+</html>

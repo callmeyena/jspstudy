@@ -1,4 +1,4 @@
-package practice05;
+package ex09_binding;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,26 +7,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/Practice05_2")
-public class Practice05_2 extends HttpServlet {
+@WebServlet("/BindingServlet2")
+public class BindingServlet2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public Practice05_2() {
+    public BindingServlet2() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 냉장고 sysout으로 출력
 		
-		request.setCharacterEncoding("UTF-8");
+		// HttpServletRequest에 저장된 속성 확인
+		System.out.println((int)request.getAttribute("a"));
 		
-		String model = request.getParameter("model");
-		System.out.println("Practice05_2: " + model);
+		// HttpSession에 저장된 속성 확인
+		System.out.println((int)request.getSession().getAttribute("a"));
 		
-		
-		System.out.println(request.getServletContext().getRealPath("paracticej05"));  	// .getServletContext(): Context를 가져와라 => 실제경로 확인할 수 있는 코드
-		
-		
+		// ServletContext에 저장된 속성
+		System.out.println((int)request.getServletContext().getAttribute("a"));
 	
 	
 	

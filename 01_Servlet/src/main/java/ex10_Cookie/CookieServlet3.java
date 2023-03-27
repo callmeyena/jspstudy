@@ -1,32 +1,34 @@
-package practice05;
+package ex10_Cookie;
 
 import java.io.IOException;
+import java.net.URLDecoder;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/Practice05_2")
-public class Practice05_2 extends HttpServlet {
+@WebServlet("/CookieServlet3")
+public class CookieServlet3 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public Practice05_2() {
+    public CookieServlet3() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 냉장고 sysout으로 출력
+
+		// 전체 쿠키 가져오기
+		Cookie[] cookies = request.getCookies();
 		
-		request.setCharacterEncoding("UTF-8");
-		
-		String model = request.getParameter("model");
-		System.out.println("Practice05_2: " + model);
-		
-		
-		System.out.println(request.getServletContext().getRealPath("paracticej05"));  	// .getServletContext(): Context를 가져와라 => 실제경로 확인할 수 있는 코드
-		
-		
+		// 전체 쿠키 확인하기
+		if(cookies != null) {
+			for(Cookie cookie : cookies) {
+				System.out.println("쿠키이름 :" + cookie.getName() + ", 쿠키값: " + URLDecoder.decode(cookie.getValue(), "UTF-8"));
+			}
+		}
 	
 	
 	
