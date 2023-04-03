@@ -25,5 +25,4 @@ public class MyTodayService implements MyService {
 	
 	
 	}
-
 }

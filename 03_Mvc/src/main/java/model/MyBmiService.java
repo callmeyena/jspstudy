@@ -19,12 +19,12 @@ public class MyBmiService implements MyService {
 		double weight = Double.parseDouble(opt2.orElse("1"));
 		
 		double bmi = weight / (height * height * 0.0001);
-		String health = "";
+		String health = "알 수 없음";
 		if(bmi < 20) {
 			health = "저체중";
 		} else if(bmi < 25) {
 			health =" 정상";
-		} else {
+		} else if(bmi < 35) {
 			health = "비만";
 		}
 		

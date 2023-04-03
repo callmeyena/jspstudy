@@ -33,7 +33,11 @@
 	<%-- js로 요청 --%>
 	<script>
 		$('#btn_bmi').on('click', function(event) {
-			location.href = '${contextPath}/bmi.do?height=' + $('#height').val() + '&weight=' + $('#weight').val();
+			let heightValue = $('#height').val();
+			let weightValue = $('#weight').val();
+			heightValue = heightValue || '0';	// heightValue가 빈 문자열이면 '0'을 사용하시오
+			weightValue = weightValue || '0';	// weightValue가 빈 문자열이면 '0'을 사용하시오.
+			location.href = '${contextPath}/bmi.do?height=' + heightvalue + '&weight=' + weightvalue;
 		})
 	</script>
 	
