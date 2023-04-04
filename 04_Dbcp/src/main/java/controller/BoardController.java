@@ -49,7 +49,7 @@ public class BoardController extends HttpServlet {
 		case "/getBoardByNo.do":
 			service = new BoardDetailService();
 			break;
-		case "/getaddboard.do":
+		case "/addBoard.do":
 			service = new BoardAddService();
 			break;
 		case "/modifyBoard.do":
@@ -65,7 +65,7 @@ public class BoardController extends HttpServlet {
 		
 		// 서비스 실행
 		if(service != null) {
-			af = service.run(request, response);	//	어디로 어떻게 이동할 것인지 af(ActionForward)에 저장한다.
+			af = service.execute(request, response);	//	어디로 어떻게 이동할 것인지 af(ActionForward)에 저장한다.
 		}
 		
 		// 응답 View로 이동

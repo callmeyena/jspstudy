@@ -16,5 +16,5 @@ public interface IBoardService {
 									 미리 만들어진 Connection을 재사용하여 CPU의 부담과 Connection을 생성하는데 필요한 시간을 줄일 수 있다. 
 */
 	
-	public ActionForward run(HttpServletRequest request, HttpServletResponse response);
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response);
 }
