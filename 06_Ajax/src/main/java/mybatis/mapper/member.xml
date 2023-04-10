@@ -5,6 +5,48 @@
 
 <mapper namespace="mybatis.mapper.member">
 
+	<!-- 목록 -->
+	<select id="selectAllMembers" resultType="Member"> 	<!-- resultType="Member"는 mybatis-config.xml의 alias이다. -->
+		SELECT 		MEMBER_NO, ID, NAME, GENDER, ADDRESS
+		  FROM 		MEMBER
+		  ORDER BY  MEMBER_NO DESC
+	</select>
 
+	<!-- 전체 회원수 -->
+	<select id="getMemberCount" resultType="int">
+		SELECT 	COUNT(*)
+		  FROM 	MEMBER
+	</select>
+	
+	<!-- 상세 -->
+	<select id="selectMemberByNo" parameterType="int" resultType="Member">		 <!-- parameterType = MemberDAO에서 memberNo -->
+		SELECT MEMBER_NO, ID, NAME, GENDER, ADDRESS
+		  FROM MEMBER
+		 WHERE MEMBER_NO = #{memberNo}
+	</select>
+
+	<!-- 삽입 -->
+	<insert id="insertMember" parameterType="Member">
+		INSERT INTO MEMBER
+			(MEMBER_NO, ID, NAME, GENDER, ADDRESS)
+		VALUES
+			(MEMBER_SEQ.NEXTVAL, #{id}, #{name}, #{gender}, #{address})
+	</insert>
+	
+	<!-- 수정 -->
+	<update id="updateMember" parameterType="Member">
+		UPDATE MEMBER
+		   SET NAME = #{name}
+		   	, GENDER = #{gender}
+		   	, ADDRESS = #{address}
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="deleteMember" parameterType="int">
+		DELETE
+		  FROM MEMBER
+		 WHERE MEMBER_NO = #{memberNo}
+	</delete>
 
 </mapper>
