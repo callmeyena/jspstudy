@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+	<!-- settings -->
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+	</settings>
+
+	<!-- typeAliases -->
+	<typeAliases>
+		<typeAlias alias="Ex" type="com.gdu.ex.domain.ExDto" />
+	</typeAliases>
+
+	<!-- 환경 설정 -->
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC"/>
+			<dataSource type="POOLED">
+				<property name="driver" value="oracle.jdbc.OracleDriver"/>
+				<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+				<property name="username" value="GDJ61"/>
+				<property name="password" value="1111"/>
+			</dataSource>
+		</environment>
+	</environments>
+
+	<!-- 
+		mapper 경로 설정하기 여기선 . 대신 /로 적어주기! ex) com.gdu.~~~ => com/gdu/~~~
+		resource 라는 키워드가 들어가면 /로 표기해주기 type는 .으로 표기하기(자바기반)
+	 -->
+	<mappers>
+		<mapper resource="com/gdu/ex/repository/ex.xml" />
+	</mappers>
+
+</configuration>
